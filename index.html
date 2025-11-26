@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Road Visualization</title>
+    <title>Road with Smooth Curves</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         #map {
             height: 600px;
             width: 100%;
         }
-        .road {
-            stroke: #000000;
-            stroke-width: 8;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            filter: drop-shadow(0 0 2px white);
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .smooth-road {
+            filter: drop-shadow(0px 1px 1px rgba(255,255,255,0.5));
         }
     </style>
 </head>
@@ -22,54 +22,76 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        const points = [
-            [17.74453308028407, 83.01033601001191],
-            [17.743840425992957, 83.01006807504548],
-            [17.7435123256567, 83.01069325663383],
-            [17.743220680408648, 83.00899633517975],
-            [17.74229713398948, 83.01069325663383],
-            [17.744824723394498, 83.01362778245665],
-            [17.745796863665014, 83.01444434616387],
-            [17.746416600332335, 83.01538849795035],
-            [17.746720392032774, 83.01677920801423],
-            [17.74574825677685, 83.01746818364221],
-            [17.746683734912875, 83.01730356526252],
-            [17.748400398981794, 83.01882705995286],
-            [17.748175598671367, 83.02256069482773],
-            [17.744476571208367, 83.02277527154469],
-            [17.74251462507409, 83.02191696467689],
-            [17.74110446301265, 83.02290401757486]
+        const roadPoints = [
+            [17.74454104753482, 83.01024474848003],
+            [17.744152189332603, 83.00962594629566],
+            [17.74383016549466, 83.00996405470568],
+            [17.74353852076429, 83.01070406556535],
+            [17.743246875558906, 83.0099768135136],
+            [17.7433015590711, 83.00917300861431],
+            [17.743022065388903, 83.00909645576675],
+            [17.742748647234194, 83.00975991377886],
+            [17.742347633185446, 83.01065303033364],
+            [17.743313710960443, 83.01212029324506],
+            [17.744996739678893, 83.0137087648458],
+            [17.74516686444382, 83.01401497623603],
+            [17.745567872178707, 83.01380445590526],
+            [17.745397747794797, 83.01412980550734],
+            [17.745428127160935, 83.01448067272528],
+            [17.74598103072373, 83.01403411444791],
+            [17.745914196317845, 83.01427653179849],
+            [17.745385596046912, 83.01448067272528],
+            [17.74601140999087, 83.01405963206375],
+            [17.74581698259204, 83.01449343153321],
+            [17.746078244360454, 83.0144296374936],
+            [17.746029637548688, 83.01520792477704],
+            [17.746357733272035, 83.01474222828777],
+            [17.746394188333767, 83.01535465108263],
+            [17.746758738358068, 83.01507395730826],
+            [17.746819496623278, 83.01569913889661],
+            [17.746807344971888, 83.01636259690872],
+            [17.74585951362204, 83.01721105763576],
+            [17.746527856762196, 83.01742157796654],
+            [17.74701999875218, 83.01781072160826],
+            [17.7476761859847, 83.01814245065964],
+            [17.74843862189408, 83.01871762556772],
+            [17.74816893949425, 83.01942070238125],
+            [17.748529822047512, 83.02122507037693],
+            [17.747593244431126, 83.02267758655316],
+            [17.7443517273628, 83.02274976126999],
+            [17.7423284685949, 83.0217197930261],
+            [17.741947701445806, 83.02153779700915],
+            [17.74051376187424, 83.02249470760354]
         ];
 
-        const map = L.map('map').setView([17.745, 83.015], 15);
+        const bounds = L.latLngBounds(roadPoints);
+        const map = L.map('map').fitBounds(bounds);
 
         // Satellite view
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Satellite imagery © Esri',
-            maxZoom: 18
+            attribution: 'Satellite imagery © Esri'
         }).addTo(map);
 
-        // Draw thick black road line
-        L.polyline(points, {
+        // Enhanced smooth road with normal thickness
+        L.polyline(roadPoints, {
             color: '#000000',
-            weight: 8, // Thicker line for road appearance
+            weight: 2.5,         // Very normal, thin line
             opacity: 0.95,
-            smoothFactor: 1,
+            smoothFactor: 3,     // Higher smooth factor for better curves
+            lineCap: 'round',
+            lineJoin: 'round',
+            className: 'smooth-road'
+        }).addTo(map);
+
+        // Very subtle background for visibility
+        L.polyline(roadPoints, {
+            color: '#FFFFFF',
+            weight: 4,
+            opacity: 0.2,
+            smoothFactor: 3,
             lineCap: 'round',
             lineJoin: 'round'
         }).addTo(map);
-
-        // Add a subtle white outline for better visibility
-        L.polyline(points, {
-            color: '#ffffff',
-            weight: 12,
-            opacity: 0.3,
-            smoothFactor: 1,
-            lineCap: 'round',
-            lineJoin: 'round'
-        }).addTo(map);
-
-        map.fitBounds(L.latLngBounds(points));
     </script>
 </body>
 </html>
