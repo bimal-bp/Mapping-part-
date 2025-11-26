@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Road with Smooth Curves</title>
+    <title>Only My Route</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         #map {
@@ -12,8 +12,13 @@
             margin: 0;
             padding: 0;
         }
-        .smooth-road {
-            filter: drop-shadow(0px 1px 1px rgba(255,255,255,0.5));
+        /* Hide all map controls */
+        .leaflet-control-container {
+            display: none;
+        }
+        /* Custom road style */
+        .my-route {
+            filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.5));
         }
     </style>
 </head>
@@ -65,33 +70,49 @@
         ];
 
         const bounds = L.latLngBounds(roadPoints);
-        const map = L.map('map').fitBounds(bounds);
+        
+        // Create map with NO base tiles - completely blank background
+        const map = L.map('map', {
+            zoomControl: false,
+            attributionControl: false,
+            doubleClickZoom: false,
+            scrollWheelZoom: true,
+            boxZoom: false,
+            dragging: true
+        }).fitBounds(bounds);
 
-        // Satellite view
-        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Satellite imagery © Esri'
-        }).addTo(map);
+        // Option 1: Completely blank background (no map tiles at all)
+        // No tile layer added = pure white/blank background
 
-        // Enhanced smooth road with normal thickness
+        // Option 2: If you want a subtle background color instead of pure white
+        const mapElement = document.getElementById('map');
+        mapElement.style.backgroundColor = '#f8f9fa'; // Light gray background
+
+        // Draw ONLY your route
         L.polyline(roadPoints, {
             color: '#000000',
-            weight: 2.5,         // Very normal, thin line
-            opacity: 0.95,
-            smoothFactor: 3,     // Higher smooth factor for better curves
-            lineCap: 'round',
-            lineJoin: 'round',
-            className: 'smooth-road'
-        }).addTo(map);
-
-        // Very subtle background for visibility
-        L.polyline(roadPoints, {
-            color: '#FFFFFF',
-            weight: 4,
-            opacity: 0.2,
+            weight: 3,
+            opacity: 1,
             smoothFactor: 3,
             lineCap: 'round',
-            lineJoin: 'round'
+            lineJoin: 'round',
+            className: 'my-route'
         }).addTo(map);
+
+        // Optional: Add start and end markers if you want
+        L.circleMarker(roadPoints[0], {
+            color: '#00ff00',
+            fillColor: '#00ff00',
+            fillOpacity: 0.8,
+            radius: 6
+        }).addTo(map).bindTooltip("Start", {permanent: false});
+
+        L.circleMarker(roadPoints[roadPoints.length - 1], {
+            color: '#ff0000',
+            fillColor: '#ff0000',
+            fillOpacity: 0.8,
+            radius: 6
+        }).addTo(map).bindTooltip("End", {permanent: false});
     </script>
 </body>
 </html>
