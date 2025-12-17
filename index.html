@@ -17,27 +17,49 @@
             color: #2d3748;
         }
         .dashboard-container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             background: #ffffff;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             overflow: hidden;
         }
-        .section-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1e293b;
+        .dashboard-header {
+            background: linear-gradient(to right, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 20px 30px;
             text-align: center;
-            padding: 20px 0;
-            background: #f1f5f9;
-            border-bottom: 3px solid #e2e8f0;
+        }
+        .dashboard-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .dashboard-header p {
+            font-size: 14px;
+            opacity: 0.9;
         }
         .dashboard-body {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             padding: 30px;
+        }
+        .machinery-section {
+            grid-column: 1 / span 3;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 10px;
+        }
+        .section-title {
+            grid-column: 1 / span 3;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3b82f6;
+            margin-bottom: 10px;
         }
         .card {
             background: #ffffff;
@@ -84,8 +106,6 @@
             font-size: 16px;
             border-bottom: 1px solid #e2e8f0;
         }
-        .metric-table th.day { color: #ea580c; }
-        .metric-table th.night { color: #1e40af; }
         .metric-table th.ftd { color: #ea580c; }
         .metric-table th.mtd { color: #1e40af; }
         .metric-table td {
@@ -98,8 +118,16 @@
         }
         .metric-table tr:last-child td { border-bottom: none; }
         .value-large { font-size: 22px; font-weight: 700; }
-        .gap-value { color: #dc2626; }
-        .gap-percentage { font-size: 14px; color: #dc2626; }
+        .gap-value {
+            color: #dc2626;
+            font-weight: 700;
+        }
+        .gap-percentage {
+            font-size: 14px;
+            font-weight: 500;
+            color: #9ca3af;
+            margin-left: 4px;
+        }
         .separator-row {
             border-top: 2px dashed #e2e8f0;
         }
@@ -183,11 +211,6 @@
             color: #64748b;
             margin-top: 4px;
         }
-        .donut-center-mtd {
-            font-size: 14px;
-            font-weight: 600;
-            margin-top: 2px;
-        }
         /* Bar Graph */
         .bar-container {
             display: flex;
@@ -227,64 +250,127 @@
         }
         .ftd-label { color: #ea580c; }
         .mtd-label { color: #1e40af; }
+        /* Compressor Specific Colors */
         .compressor-ftd { color: #059669; }
         .compressor-mtd { color: #0d9488; }
-
-        /* Horizontal Bar Graph for MTD Availability % */
-        .availability-bar-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            height: 240px;
-            margin-top: 20px;
+        /* Machinery Data Styles - Box 1 & 2 */
+        .machinery-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
         }
-        .availability-bar-row {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .machinery-table th {
+            text-align: center;
+            font-weight: 700;
+            padding: 14px 5px;
+            font-size: 15px;
+            background-color: #f8fafc;
+            border-bottom: 2px solid #e2e8f0;
         }
-        .availability-label {
-            width: 90px;
-            text-align: right;
+        .machinery-table td {
+            text-align: center;
+            padding: 16px 5px;
+            font-size: 17px;
             font-weight: 600;
-            font-size: 16px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .machinery-table tr:last-child td {
+            border-bottom: none;
+        }
+        .day-header { background-color: #dbeafe; color: #1e40af; }
+        .night-header { background-color: #1e293b; color: white; }
+        .availability-header { background-color: #f0f9ff; color: #0c4a6e; }
+        .machinery-name { 
+            text-align: left; 
+            padding-left: 15px !important; 
+            font-weight: 700; 
             color: #1e293b;
         }
-        .availability-bar-wrapper {
+        .availability-cell { 
+            font-weight: 700; 
+            font-size: 18px;
+        }
+        .tipper-availability { color: #3b82f6; }
+        .excavator-availability { color: #10b981; }
+        .loader-availability { color: #f59e0b; }
+        
+        /* Machinery Box 3 - Horizontal Bar Chart */
+        .availability-bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            margin-top: 30px;
+            padding: 0 10px;
+            height: 280px;
+            justify-content: center;
+        }
+        .availability-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .availability-label {
+            width: 100px;
+            font-weight: 700;
+            font-size: 17px;
+            text-align: right;
+        }
+        .availability-bar-container {
             flex: 1;
-            height: 40px;
-            background: #e2e8f0;
+            height: 35px;
+            background-color: #f1f5f9;
             border-radius: 8px;
             overflow: hidden;
             position: relative;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
         }
         .availability-bar-fill {
             height: 100%;
-            background: linear-gradient(to right, #6366f1, #a78bfa);
             border-radius: 8px;
-            transition: width 0.6s ease;
+            transition: width 1.5s ease;
+            width: 0; /* Will be set by JS */
+        }
+        .availability-percentage {
+            width: 65px;
+            font-weight: 800;
+            font-size: 20px;
+            text-align: left;
+        }
+        .availability-note {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #6b7280;
+            text-align: center;
+            font-style: italic;
+            padding-top: 10px;
+            border-top: 1px dashed #e5e7eb;
+        }
+        .machinery-stats {
+            margin-top: 15px;
             display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 12px;
-            color: white;
-            font-weight: 700;
-            font-size: 16px;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 15px;
+            color: #475569;
         }
-        .card:hover .availability-bar-fill {
-            transform: scaleX(1.05);
-            transform-origin: left;
+        .machinery-stats div {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 10px;
+            background-color: #f8fafc;
+            border-radius: 6px;
         }
-
-        /* Equipment Availability Specific */
-        .equipment-table th:first-child {
-            text-align: left;
-            padding-left: 20px;
-        }
-        .equipment-table td:first-child {
-            text-align: left;
-            padding-left: 20px;
+        .machinery-stats span:first-child {
             font-weight: 600;
+            color: #1e293b;
+        }
+        .machinery-stats span:last-child {
+            font-weight: 700;
+        }
+        /* Center graph content in cards */
+        .card:nth-child(2) .card-content,
+        .card:nth-child(3) .card-content {
+            justify-content: space-between;
         }
         /* Footer */
         .dashboard-footer {
@@ -296,25 +382,36 @@
             line-height: 1.5;
         }
         /* Responsiveness */
-        @media (max-width: 1100px) {
-            .dashboard-body { grid-template-columns: 1fr 1fr; }
-            .card.wide { grid-column: 1 / span 2; }
+        @media (max-width: 1200px) {
+            .dashboard-body, .machinery-section {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                grid-column: 1;
+            }
         }
         @media (max-width: 768px) {
-            .dashboard-body { grid-template-columns: 1fr; }
             .combined-graphs { flex-direction: column; }
             .completion-line { flex-direction: column; gap: 15px; }
             .completion-arrow { transform: rotate(90deg); }
             .donut-container { width: 150px; height: 150px; }
             .donut-hole { width: 90px; height: 90px; }
-            .availability-bar-container { height: 200px; }
+            .availability-bar-chart {
+                gap: 25px;
+                height: 250px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="dashboard-container">
-        <!-- Quarry Performance Section (First) -->
-        <div class="section-title">QUARRY PERFORMANCE</div>
+        <!-- Header -->
+        <div class="dashboard-header">
+            <h1>Quarry Performance Dashboard</h1>
+            <p>Real-time drilling, compressor, and machinery performance metrics</p>
+        </div>
+        
+        <!-- Main Content -->
         <div class="dashboard-body">
             <!-- Performance Summary Table + Completion Line -->
             <div class="card">
@@ -338,7 +435,9 @@
                                 <td class="gap-value">-315</td>
                                 <td class="gap-value">-2,645<span class="gap-percentage">(17.5%)</span></td>
                             </tr>
-                            <tr class="separator-row"><td colspan="3"></td></tr>
+                            <!-- Separator Row -->
+                            <tr class="separator-row">
+                            </tr>
                             <tr>
                                 <td><strong>COMPRESSOR</strong></td>
                                 <td>13</td>
@@ -365,21 +464,23 @@
                     </div>
                 </div>
             </div>
-            <!-- Drilling Performance Visualization -->
+            <!-- Combined Drilling Graphs -->
             <div class="card">
                 <div class="card-content">
-                    <div class="card-title">DRILLING PERFORMANCE VISUALIZATION</div>
+                    <div class="card-title">Holes - Target - 1000 / Day</div>
                     <div class="combined-graphs">
+                        <!-- FTD Donut -->
                         <div class="graph-section">
                             <div class="donut-container">
                                 <div class="donut-chart" style="background: conic-gradient(#ea580c 0% 68.5%, #fef3c7 68.5% 100%); box-shadow: 0 6px 16px rgba(234, 88, 12, 0.2);"></div>
                                 <div class="donut-hole">
                                     <div class="donut-center-value" style="color: #ea580c;">68.5%</div>
-                                    <div class="donut-center-label">FTD</div>
+                                    <div class="donut-center-label">FTD </div>
                                 </div>
                             </div>
                             <div class="graph-label ftd-label">FTD Performance</div>
                         </div>
+                        <!-- MTD Bar -->
                         <div class="graph-section">
                             <div class="bar-container">
                                 <div>
@@ -396,22 +497,23 @@
                     </div>
                 </div>
             </div>
-            <!-- Compressor Performance -->
+            <!-- Compressor Performance Card -->
             <div class="card">
                 <div class="card-content">
-                    <div class="card-title">COMPRESSOR PERFORMANCE</div>
+                    <div class="card-title">Compressor - Target -17 / Day</div>
                     <div class="combined-graphs">
+                        <!-- FTD Donut for Compressor -->
                         <div class="graph-section">
                             <div class="donut-container">
                                 <div class="donut-chart" style="background: conic-gradient(#059669 0% 76.47%, #d1fae5 76.47% 100%); box-shadow: 0 6px 16px rgba(5, 150, 105, 0.2);"></div>
                                 <div class="donut-hole">
                                     <div class="donut-center-value" style="color: #059669;">76.5%</div>
-                                    <div class="donut-center-label">FTD</div>
-                                    <div class="donut-center-mtd" style="color: #0d9488;">76.5% MTD</div>
+                                    <div class="donut-center-label">FTD </div>
                                 </div>
                             </div>
                             <div class="graph-label compressor-ftd">FTD (13/17)</div>
                         </div>
+                        <!-- MTD Bar for Compressor -->
                         <div class="graph-section">
                             <div class="bar-container">
                                 <div>
@@ -428,121 +530,188 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Machinery / Equipment Availability Section (Second) -->
-        <div class="section-title">MACHINERY AVAILABILITY</div>
-        <div class="dashboard-body">
-            <!-- Current Day Availability -->
-            <div class="card wide">
-                <div class="card-content">
-                    <div class="card-title">EQUIPMENT AVAILABILITY (Current Day)</div>
-                    <table class="metric-table equipment-table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th class="day">Day</th>
-                                <th class="night">Night</th>
-                                <th>% Availability</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Tipper</strong></td>
-                                <td>9</td>
-                                <td>8</td>
-                                <td>71%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Excavator</strong></td>
-                                <td>4</td>
-                                <td>2</td>
-                                <td>60%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Loader</strong></td>
-                                <td>2</td>
-                                <td>1</td>
-                                <td>75%</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            
+            <!-- Machinery Section -->
+            <div class="section-title">Machinery Performance</div>
+            <div class="machinery-section">
+                <!-- Box 1: Machinery FTD Performance -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title">Machinery - FTD Performance</div>
+                        <table class="machinery-table">
+                            <thead>
+                                <tr>
+                                    <th class="machinery-name">Machinery</th>
+                                    <th class="day-header">Day</th>
+                                    <th class="night-header">Night</th>
+                                    <th class="availability-header">Availability</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="machinery-name">Tipper</td>
+                                    <td>9</td>
+                                    <td>8</td>
+                                    <td class="availability-cell tipper-availability">71%</td>
+                                </tr>
+                                <tr>
+                                    <td class="machinery-name">Excavator</td>
+                                    <td>4</td>
+                                    <td>2</td>
+                                    <td class="availability-cell excavator-availability">60%</td>
+                                </tr>
+                                <tr>
+                                    <td class="machinery-name">Loader</td>
+                                    <td>2</td>
+                                    <td>1</td>
+                                    <td class="availability-cell loader-availability">75%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="machinery-stats">
+                            <div>
+                                <span>Total FTD Units:</span>
+                                <span>34</span>
+                            </div>
+                            <div>
+                                <span>Average Availability:</span>
+                                <span>68.67%</span>
+                            </div>
+                        </div>
+                        <div class="availability-note">FTD: First To Date (Today's Performance)</div>
+                    </div>
                 </div>
-            </div>
-            <!-- Cumulative Availability with Bar Graph -->
-            <div class="card wide">
-                <div class="card-content">
-                    <div class="card-title">EQUIPMENT AVAILABILITY (Cumulative / MTD)</div>
-                    <table class="metric-table equipment-table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th class="day">Day</th>
-                                <th class="night">Night</th>
-                                <th>% Availability</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Tipper</strong></td>
-                                <td>195</td>
-                                <td>218</td>
-                                <td>71%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Excavator</strong></td>
-                                <td>68</td>
-                                <td>46</td>
-                                <td>60%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Loader</strong></td>
-                                <td>65</td>
-                                <td>35</td>
-                                <td>75%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <!-- MTD Availability % Bar Graph -->
-                    <div class="card-title" style="margin-top: 30px; border-top: 2px solid #e2e8f0; padding-top: 20px; margin-bottom: 0;">MTD Availability %</div>
-                    <div class="availability-bar-container">
-                        <div class="availability-bar-row">
-                            <div class="availability-label">Tipper</div>
-                            <div class="availability-bar-wrapper">
-                                <div class="availability-bar-fill" style="width: 71%;">71%</div>
+                
+                <!-- Box 2: Machinery MTD Performance -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title">Machinery - MTD Performance</div>
+                        <table class="machinery-table">
+                            <thead>
+                                <tr>
+                                    <th class="machinery-name">Machinery</th>
+                                    <th class="day-header">Day</th>
+                                    <th class="night-header">Night</th>
+                                    <th class="availability-header">Availability</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="machinery-name">Tipper</td>
+                                    <td>195</td>
+                                    <td>218</td>
+                                    <td class="availability-cell tipper-availability">71%</td>
+                                </tr>
+                                <tr>
+                                    <td class="machinery-name">Excavator</td>
+                                    <td>68</td>
+                                    <td>46</td>
+                                    <td class="availability-cell excavator-availability">60%</td>
+                                </tr>
+                                <tr>
+                                    <td class="machinery-name">Loader</td>
+                                    <td>65</td>
+                                    <td>35</td>
+                                    <td class="availability-cell loader-availability">75%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="machinery-stats">
+                            <div>
+                                <span>Total MTD Units:</span>
+                                <span>627</span>
+                            </div>
+                            <div>
+                                <span>Average Availability:</span>
+                                <span>68.67%</span>
+                            </div>
+                            <div>
+                                <span>Tipper Total:</span>
+                                <span>413</span>
+                            </div>
+                            <div>
+                                <span>Excavator Total:</span>
+                                <span>114</span>
+                            </div>
+                            <div>
+                                <span>Loader Total:</span>
+                                <span>100</span>
                             </div>
                         </div>
-                        <div class="availability-bar-row">
-                            <div class="availability-label">Excavator</div>
-                            <div class="availability-bar-wrapper">
-                                <div class="availability-bar-fill" style="width: 60%;">60%</div>
+                        <div class="availability-note">MTD: Month To Date Performance</div>
+                    </div>
+                </div>
+                
+                <!-- Box 3: Machinery Availability Bar Chart -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title">Machinery Availability %</div>
+                        <div class="availability-bar-chart">
+                            <div class="availability-bar-item">
+                                <div class="availability-label">Tipper</div>
+                                <div class="availability-bar-container">
+                                    <div class="availability-bar-fill tipper-availability" data-percentage="71" style="background: linear-gradient(to right, #3b82f6, #60a5fa);"></div>
+                                </div>
+                                <div class="availability-percentage tipper-availability">71%</div>
+                            </div>
+                            <div class="availability-bar-item">
+                                <div class="availability-label">Excavator</div>
+                                <div class="availability-bar-container">
+                                    <div class="availability-bar-fill excavator-availability" data-percentage="60" style="background: linear-gradient(to right, #10b981, #34d399);"></div>
+                                </div>
+                                <div class="availability-percentage excavator-availability">60%</div>
+                            </div>
+                            <div class="availability-bar-item">
+                                <div class="availability-label">Loader</div>
+                                <div class="availability-bar-container">
+                                    <div class="availability-bar-fill loader-availability" data-percentage="75" style="background: linear-gradient(to right, #f59e0b, #fbbf24);"></div>
+                                </div>
+                                <div class="availability-percentage loader-availability">75%</div>
                             </div>
                         </div>
-                        <div class="availability-bar-row">
-                            <div class="availability-label">Loader</div>
-                            <div class="availability-bar-wrapper">
-                                <div class="availability-bar-fill" style="width: 75%;">75%</div>
-                            </div>
-                        </div>
+                        <div class="availability-note">Availability based on operational hours vs scheduled hours</div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Footer -->
         <div class="dashboard-footer">
-            Quarry Performance Dashboard © 2025 • December 17, 2025
+            Quarry Performance Dashboard | Last updated: Today at 14:30
         </div>
     </div>
     <script>
-        // Optional click alerts (retained for interactivity)
-        document.querySelectorAll('.card')[0].addEventListener('click', function() {
-            alert('Quarry Performance Summary\n\nDRILLING:\nFTD: 685 holes (Gap: -315)\nMTD: 12,465 holes (Gap: -2,645 / 17.5%)\n\nCOMPRESSOR:\nFTD: 13 units (Gap: -4)\nMTD: 390 units (Gap: -120 / 23.53%)');
-        });
-        document.querySelectorAll('.card')[1].addEventListener('click', function() {
-            alert('Drilling Performance\nFTD: 68.5% (685/1,000)\nMTD: 82.5% (12,465/15,110)\nGap MTD: -2,645 (17.5%)');
-        });
-        document.querySelectorAll('.card')[2].addEventListener('click', function() {
-            alert('Compressor Performance\nFTD: 76.47% (13/17)\nMTD: 76.47% (390/510)\nGap MTD: -120 (23.53%)');
+        // Animate bar chart on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const bars = document.querySelectorAll('.availability-bar-fill');
+            bars.forEach(bar => {
+                const percentage = bar.getAttribute('data-percentage');
+                // Set width after a small delay for animation effect
+                setTimeout(() => {
+                    bar.style.width = `${percentage}%`;
+                }, 300);
+            });
+            
+            // Click interactions for original 3 cards
+            document.querySelectorAll('.card')[0].addEventListener('click', function() {
+                alert('Performance Summary\n\nDRILLING:\nFTD:\n- Holes: 685\n- Gap: -315\n\nMTD:\n- Holes: 12,465\n- Gap: -2,645 (17.5%)\n\nCOMPRESSOR:\nFTD:\n- Units: 13\n- Gap: -4\n\nMTD:\n- Units: 390\n- Gap: -120 (23.53%)');
+            });
+            document.querySelectorAll('.card')[1].addEventListener('click', function() {
+                alert('Drilling Performance\n\nFTD: 68.5% completed (685/1,000 units)\nMTD: 82.5% completed (12,465/15,110 units)\n\nGap:\n- FTD: -315 units\n- MTD: -2,645 units (17.5%)');
+            });
+            document.querySelectorAll('.card')[2].addEventListener('click', function() {
+                alert('Compressor Performance\n\nFTD: 76.47% completed (13/17 units)\nMTD: 76.47% completed (390/510 units)\n\nGap:\n- FTD: -4 units\n- MTD: -120 units (23.53%)');
+            });
+            
+            // Click interactions for machinery cards
+            document.querySelectorAll('.machinery-section .card')[0].addEventListener('click', function() {
+                alert('Machinery FTD Performance\n\nTipper:\n- Day Shift: 9 units\n- Night Shift: 8 units\n- Total: 17 units\n- Availability: 71%\n\nExcavator:\n- Day Shift: 4 units\n- Night Shift: 2 units\n- Total: 6 units\n- Availability: 60%\n\nLoader:\n- Day Shift: 2 units\n- Night Shift: 1 unit\n- Total: 3 units\n- Availability: 75%');
+            });
+            document.querySelectorAll('.machinery-section .card')[1].addEventListener('click', function() {
+                alert('Machinery MTD Performance\n\nTipper:\n- Day Shift: 195 units\n- Night Shift: 218 units\n- Total: 413 units\n- Availability: 71%\n\nExcavator:\n- Day Shift: 68 units\n- Night Shift: 46 units\n- Total: 114 units\n- Availability: 60%\n\nLoader:\n- Day Shift: 65 units\n- Night Shift: 35 units\n- Total: 100 units\n- Availability: 75%');
+            });
+            document.querySelectorAll('.machinery-section .card')[2].addEventListener('click', function() {
+                alert('Machinery Availability Analysis\n\nTipper: 71%\n- Performance: Good\n- Target: 70%\n\nExcavator: 60%\n- Performance: Needs Improvement\n- Target: 75%\n\nLoader: 75%\n- Performance: Excellent\n- Target: 70%');
+            });
         });
     </script>
 </body>
