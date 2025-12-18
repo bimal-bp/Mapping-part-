@@ -11,14 +11,14 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Arial, sans-serif;
         }
-      
+       
         body {
             background: #f4f6f9;
             color: #333;
             padding: 20px;
             min-height: 100vh;
         }
-      
+       
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -26,40 +26,42 @@
             grid-template-columns: 1fr;
             gap: 24px;
         }
-      
+       
         .card {
             background: white;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             overflow: hidden;
+            border-top: 4px solid #2c3e50;
         }
-      
+       
         .card-header {
-            background: #2c3e50;
-            color: white;
-            padding: 18px 24px;
+            padding: 16px 24px;
             font-weight: 600;
             font-size: 18px;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            background: white;
         }
-      
+       
         .card-body {
             padding: 24px;
         }
-      
+       
         /* Performance Metrics Section */
         .performance-section {
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 24px;
         }
-      
-        /* Performance Table */
+       
+        /* Performance Table - Text Only */
         .performance-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 16px;
         }
-      
+       
         .performance-table th {
             text-align: left;
             padding: 14px 16px;
@@ -68,35 +70,35 @@
             color: #2c3e50;
             border-bottom: 1px solid #e0e0e0;
         }
-      
+       
         .performance-table td {
             padding: 14px 16px;
             border-bottom: 1px solid #f0f0f0;
             font-size: 17px;
             font-weight: 500;
         }
-      
+       
         .performance-table tr:last-child td {
             border-bottom: none;
         }
-      
+       
         .metric-value {
             font-weight: 600;
             color: #2c3e50;
         }
-      
+       
         /* Achievement Section */
         .achievement-item {
             margin-bottom: 32px;
         }
-      
+       
         .achievement-title {
             font-weight: 600;
             color: #2c3e50;
             margin-bottom: 12px;
             font-size: 17px;
         }
-      
+       
         .progress-bar {
             height: 32px;
             background: #e9ecef;
@@ -105,7 +107,7 @@
             position: relative;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
         }
-      
+       
         .progress-fill {
             height: 100%;
             border-radius: 16px;
@@ -115,29 +117,29 @@
             justify-content: flex-end;
             padding-right: 16px;
         }
-      
+       
         .progress-value {
             color: white;
             font-weight: 700;
             font-size: 15px;
             text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
-      
-        /* Middle Row */
+       
+        /* Row for Loading Log and Area Wise Compressor */
         .middle-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 24px;
         }
-      
-        /* Loading Log Table - Smaller inputs */
+       
+        /* Loading Log Table - Updated */
         .loading-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0 8px;
             font-size: 15px;
         }
-      
+       
         .loading-table th {
             text-align: left;
             padding: 12px 16px;
@@ -145,40 +147,54 @@
             font-weight: 600;
             color: #2c3e50;
         }
-      
+       
         .loading-table td {
             padding: 12px 16px;
             background: #f9fbfc;
+            vertical-align: top;
         }
-      
-        .loading-table .shift-cell {
+       
+        .shift-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-weight: 600;
-            width: 120px;
+            color: #2c3e50;
+            min-width: 120px;
         }
-      
-        .data-input-small {
-            width: 100%;
-            padding: 8px 10px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+       
+        .shift-symbol {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
             font-size: 14px;
-            background: white;
+            color: white;
         }
-      
-        .data-input-small:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+       
+        .morning-symbol {
+            background: #f39c12;
         }
-      
-        /* Area Table */
+       
+        .afternoon-symbol {
+            background: #3498db;
+        }
+       
+        .night-symbol {
+            background: #2c3e50;
+        }
+       
+        /* Area Wise Compressor Table - Updated */
         .area-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0 8px;
             font-size: 15px;
         }
-      
+       
         .area-table th {
             text-align: left;
             padding: 12px 16px;
@@ -186,46 +202,81 @@
             font-weight: 600;
             color: #2c3e50;
         }
-      
+       
         .area-table td {
             padding: 12px 16px;
             background: #f9fbfc;
         }
-      
-        /* Trial Form - Larger inputs */
+       
+        .area-table .total-row {
+            background: #e8f4fc;
+            font-weight: 600;
+        }
+       
+        /* Data Inputs */
+        .data-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            background: white;
+        }
+       
+        .data-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+        }
+       
+        /* Weekly Trial Data - Updated */
         .trial-form {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
         }
-      
+       
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
-      
+       
         .form-group label {
             font-weight: 500;
             color: #444;
             font-size: 15px;
         }
-      
-        .data-input-large {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            background: white;
+       
+        .trial-summary {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 8px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
         }
-      
-        .data-input-large:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+       
+        .summary-box {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
         }
-      
+       
+        .summary-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+       
+        .summary-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+       
         /* Remarks */
         .remarks-textarea {
             width: 100%;
@@ -236,31 +287,32 @@
             font-size: 15px;
             resize: vertical;
             background: #f9fbfc;
+            line-height: 1.6;
         }
-      
+       
         .remarks-textarea:focus {
             outline: none;
             border-color: #3498db;
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
         }
-      
-        /* Bottom Row */
+       
+        /* Bottom Row for Trial and Remarks */
         .bottom-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 24px;
         }
-      
-        /* Title underline style */
-        .title-underline {
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 8px;
+       
+        /* Section Titles */
+        .section-title {
             font-size: 18px;
             font-weight: 600;
             color: #2c3e50;
             margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
         }
-      
+       
         /* Responsive */
         @media (max-width: 1024px) {
             .performance-section,
@@ -269,14 +321,23 @@
                 grid-template-columns: 1fr;
             }
             .trial-form {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
+            }
+            .trial-summary {
+                grid-template-columns: 1fr;
             }
         }
-      
+       
         @media (max-width: 768px) {
             body { padding: 12px; }
-            .trial-form {
-                grid-template-columns: 1fr;
+            .card-header { font-size: 17px; padding: 14px 20px; }
+            .card-body { padding: 20px; }
+            .performance-table td {
+                font-size: 16px;
+                padding: 12px 14px;
+            }
+            .shift-label {
+                min-width: 100px;
             }
         }
     </style>
@@ -343,6 +404,7 @@
                     </table>
                 </div>
             </div>
+
             <!-- Achievements -->
             <div class="card">
                 <div class="card-header">Performance Achievements</div>
@@ -350,7 +412,7 @@
                     <div class="achievement-item">
                         <div class="achievement-title">Compressor Achievement</div>
                         <div class="progress-bar">
-                            <div class="progress-fill" id="comp-fill" style="width: 70.6%; background: #3498db;">
+                            <div class="progress-fill" id="compressors-fill" style="width: 70.6%; background: #3498db;">
                                 <span class="progress-value">70.6%</span>
                             </div>
                         </div>
@@ -366,7 +428,7 @@
                     <div class="achievement-item">
                         <div class="achievement-title">Production Achievement</div>
                         <div class="progress-bar">
-                            <div class="progress-fill" id="prod-fill" style="width: 92.5%; background: #9b59b6;">
+                            <div class="progress-fill" id="production-fill" style="width: 92.5%; background: #9b59b6;">
                                 <span class="progress-value">92.5%</span>
                             </div>
                         </div>
@@ -393,30 +455,50 @@
                         <tr>
                             <th>Shift</th>
                             <th>Start Time</th>
-                            <th>Tippers</th>
+                            <th>Trips</th>
+                            <th>Qty</th>
                             <th>End Time</th>
                         </tr>
                         <tr>
-                            <td class="shift-cell">☀️ Morning</td>
-                            <td><input type="time" class="data-input-small" value="06:00"></td>
-                            <td><input type="number" class="data-input-small" value="8"></td>
-                            <td><input type="time" class="data-input-small" value="14:00"></td>
+                            <td>
+                                <div class="shift-label">
+                                    <span class="shift-symbol morning-symbol">M</span>
+                                    <span>Morning</span>
+                                </div>
+                            </td>
+                            <td><input type="time" class="data-input" value="06:00"></td>
+                            <td><input type="number" class="data-input" value="8"></td>
+                            <td><input type="number" class="data-input" value="320"></td>
+                            <td><input type="time" class="data-input" value="14:00"></td>
                         </tr>
                         <tr>
-                            <td class="shift-cell">🌤️ Afternoon</td>
-                            <td><input type="time" class="data-input-small" value="14:00"></td>
-                            <td><input type="number" class="data-input-small" value="7"></td>
-                            <td><input type="time" class="data-input-small" value="22:00"></td>
+                            <td>
+                                <div class="shift-label">
+                                    <span class="shift-symbol afternoon-symbol">A</span>
+                                    <span>Afternoon</span>
+                                </div>
+                            </td>
+                            <td><input type="time" class="data-input" value="14:00"></td>
+                            <td><input type="number" class="data-input" value="7"></td>
+                            <td><input type="number" class="data-input" value="280"></td>
+                            <td><input type="time" class="data-input" value="22:00"></td>
                         </tr>
                         <tr>
-                            <td class="shift-cell">🌙 Night</td>
-                            <td><input type="time" class="data-input-small" value="22:00"></td>
-                            <td><input type="number" class="data-input-small" value="6"></td>
-                            <td><input type="time" class="data-input-small" value="06:00"></td>
+                            <td>
+                                <div class="shift-label">
+                                    <span class="shift-symbol night-symbol">N</span>
+                                    <span>Night</span>
+                                </div>
+                            </td>
+                            <td><input type="time" class="data-input" value="22:00"></td>
+                            <td><input type="number" class="data-input" value="6"></td>
+                            <td><input type="number" class="data-input" value="240"></td>
+                            <td><input type="time" class="data-input" value="06:00"></td>
                         </tr>
                     </table>
                 </div>
             </div>
+
             <!-- Area Wise Compressor -->
             <div class="card">
                 <div class="card-header">Area Wise Compressor</div>
@@ -429,33 +511,38 @@
                         </tr>
                         <tr>
                             <td>9 Ha – Pit 3</td>
-                            <td><input type="number" class="data-input-small" value="3"></td>
-                            <td><input type="number" class="data-input-small" value="55"></td>
+                            <td><input type="number" class="data-input" value="3"></td>
+                            <td><input type="number" class="data-input" value="55"></td>
                         </tr>
                         <tr>
                             <td>Bench 1</td>
-                            <td><input type="number" class="data-input-small" value="2"></td>
-                            <td><input type="number" class="data-input-small" value="38"></td>
+                            <td><input type="number" class="data-input" value="2"></td>
+                            <td><input type="number" class="data-input" value="38"></td>
                         </tr>
                         <tr>
                             <td>Bench 2</td>
-                            <td><input type="number" class="data-input-small" value="2"></td>
-                            <td><input type="number" class="data-input-small" value="42"></td>
+                            <td><input type="number" class="data-input" value="2"></td>
+                            <td><input type="number" class="data-input" value="42"></td>
                         </tr>
                         <tr>
                             <td>Bench 3</td>
-                            <td><input type="number" class="data-input-small" value="3"></td>
-                            <td><input type="number" class="data-input-small" value="52"></td>
+                            <td><input type="number" class="data-input" value="3"></td>
+                            <td><input type="number" class="data-input" value="52"></td>
                         </tr>
                         <tr>
                             <td>Bench 4</td>
-                            <td><input type="number" class="data-input-small" value="1"></td>
-                            <td><input type="number" class="data-input-small" value="28"></td>
+                            <td><input type="number" class="data-input" value="1"></td>
+                            <td><input type="number" class="data-input" value="28"></td>
                         </tr>
                         <tr>
                             <td>Pit-2</td>
-                            <td><input type="number" class="data-input-small" value="1"></td>
-                            <td><input type="number" class="data-input-small" value="30"></td>
+                            <td><input type="number" class="data-input" value="1"></td>
+                            <td><input type="number" class="data-input" value="30"></td>
+                        </tr>
+                        <tr class="total-row">
+                            <td><strong>Total</strong></td>
+                            <td><strong>12</strong></td>
+                            <td><strong>245</strong></td>
                         </tr>
                     </table>
                 </div>
@@ -464,60 +551,74 @@
 
         <!-- Bottom Row: Trial Data and Remarks -->
         <div class="bottom-row">
-            <!-- Weekly Trial Data -->
+            <!-- Weekly Trial Data - Expanded -->
             <div class="card">
+                <div class="card-header">Weekly Trial Data</div>
                 <div class="card-body">
-                    <div class="title-underline">Weekly Trial Data</div>
                     <form class="trial-form">
                         <div class="form-group">
                             <label>Date</label>
-                            <input type="date" class="data-input-large">
+                            <input type="date" class="data-input" value="2024-01-15">
                         </div>
                         <div class="form-group">
                             <label>Area</label>
-                            <input type="text" class="data-input-large" placeholder="e.g. Pit 3">
-                        </div>
-                        <div class="form-group">
-                            <label>Total Trips</label>
-                            <input type="number" class="data-input-large">
+                            <input type="text" class="data-input" placeholder="Enter area">
                         </div>
                         <div class="form-group">
                             <label>Compressors</label>
-                            <input type="number" class="data-input-large">
-                        </div>
-                        <div class="form-group">
-                            <label>Qty (Tons)</label>
-                            <input type="number" class="data-input-large">
+                            <input type="number" class="data-input" value="3">
                         </div>
                         <div class="form-group">
                             <label>NMR</label>
-                            <input type="number" class="data-input-large" step="0.01">
+                            <input type="number" class="data-input" step="0.01" value="4.2">
                         </div>
                         <div class="form-group">
                             <label>Holes</label>
-                            <input type="number" class="data-input-large">
+                            <input type="number" class="data-input" value="150">
+                        </div>
+                        <div class="form-group">
+                            <label>Feets</label>
+                            <input type="number" class="data-input" value="750">
                         </div>
                         <div class="form-group">
                             <label>Production</label>
-                            <input type="number" class="data-input-large">
+                            <input type="number" class="data-input" value="220">
                         </div>
                         <div class="form-group">
                             <label>Recovery %</label>
-                            <input type="number" class="data-input-large" step="0.01">
+                            <input type="number" class="data-input" step="0.01" value="85.5">
                         </div>
                     </form>
+                    
+                    <!-- Summary Section -->
+                    <div class="trial-summary">
+                        <div class="summary-box">
+                            <div class="summary-label">Total Trips</div>
+                            <div class="summary-value" id="total-trips">21</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="summary-label">Total Quantity</div>
+                            <div class="summary-value" id="total-qty">840</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="summary-label">Avg. Recovery</div>
+                            <div class="summary-value" id="avg-recovery">85.5%</div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <!-- Daily Remarks -->
             <div class="card">
+                <div class="card-header">Daily Remarks & Notes</div>
                 <div class="card-body">
-                    <div class="title-underline">Daily Remarks & Notes</div>
                     <textarea class="remarks-textarea" placeholder="Enter daily remarks, observations, issues, or special instructions here...">
 • Compressor #3 needs maintenance check
 • Extra tipper arranged for tomorrow
 • Blasting scheduled for Friday 10 AM
 • Safety inspection completed
 • Water level in pit 2 is high
+• New drilling pattern implemented in Bench 2
                     </textarea>
                 </div>
             </div>
@@ -533,12 +634,14 @@
                 production: 1250,
                 nmr: 4.2
             };
+
             const targets = {
                 compressors: 17,
                 holes: 1000,
                 production: 1350,
                 nmr: 6.5
             };
+
             Object.keys(ftdValues).forEach(key => {
                 const achievement = Math.min((ftdValues[key] / targets[key]) * 100, 100);
                 const fillElement = document.getElementById(`${key}-fill`);
@@ -548,7 +651,39 @@
                 }
             });
         }
-        document.addEventListener('DOMContentLoaded', updateAchievements);
+
+        // Function to calculate and update totals
+        function updateTotals() {
+            // Calculate total trips and quantity from Loading Log
+            const tripInputs = document.querySelectorAll('.loading-table input[type="number"]:nth-of-type(1)');
+            const qtyInputs = document.querySelectorAll('.loading-table input[type="number"]:nth-of-type(2)');
+            
+            let totalTrips = 0;
+            let totalQty = 0;
+            
+            tripInputs.forEach(input => totalTrips += Number(input.value) || 0);
+            qtyInputs.forEach(input => totalQty += Number(input.value) || 0);
+            
+            document.getElementById('total-trips').textContent = totalTrips;
+            document.getElementById('total-qty').textContent = totalQty;
+            
+            // Calculate average recovery from Trial Data
+            const recoveryInput = document.querySelector('input[placeholder*="Recovery"]');
+            if (recoveryInput && recoveryInput.value) {
+                document.getElementById('avg-recovery').textContent = `${recoveryInput.value}%`;
+            }
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateAchievements();
+            updateTotals();
+            
+            // Add event listeners to inputs for real-time updates
+            document.querySelectorAll('.data-input').forEach(input => {
+                input.addEventListener('input', updateTotals);
+            });
+        });
     </script>
 </body>
 </html>
