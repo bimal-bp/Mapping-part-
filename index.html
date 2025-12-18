@@ -1,305 +1,584 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quarry MIS - Modern Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --primary: #2563eb;
-    --primary-light: #3b82f6;
-    --success: #10b981;
-    --warning: #f59e0b;
-    --danger: #ef4444;
-    --gray-100: #f3f4f6;
-    --gray-200: #e5e7eb;
-    --gray-300: #d1d5db;
-    --gray-600: #4b5563;
-    --gray-800: #1f2937;
-    --gray-900: #111827;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
-    --radius: 12px;
-  }
-
-  body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 20px;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    color: var(--gray-800);
-    min-height: 100vh;
-  }
-
-  .container {
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-
-  h1 {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--gray-900);
-    margin-bottom: 2rem;
-    background: linear-gradient(to right, var(--primary), var(--primary-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 32px;
-  }
-
-  .card {
-    background: white;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-lg);
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 25px rgba(0,0,0,0.15);
-  }
-
-  .card-header {
-    padding: 16px 24px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: white;
-  }
-
-  .card-header.primary { background: linear-gradient(to right, var(--primary), var(--primary-light)); }
-  .card-header.success { background: linear-gradient(to right, #059669, var(--success)); }
-  .card-header.warning { background: linear-gradient(to right, #d97706, var(--warning)); }
-  .card-header.info { background: linear-gradient(to right, #1d4ed8, #3b82f6); }
-
-  table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-  }
-
-  th, td {
-    padding: 12px 16px;
-    text-align: center;
-  }
-
-  th {
-    background: var(--gray-100);
-    font-weight: 600;
-    color: var(--gray-800);
-    font-size: 0.95rem;
-  }
-
-  td {
-    background: white;
-  }
-
-  tr:nth-child(even) td {
-    background: #fafbff;
-  }
-
-  input {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid var(--gray-300);
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.2s;
-    background: white;
-  }
-
-  input:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
-  }
-
-  input[readonly] {
-    background: var(--gray-100);
-    font-weight: 600;
-    color: var(--gray-900);
-  }
-
-  .achievement-value {
-    font-size: 1.1rem;
-    font-weight: 600;
-  }
-
-  .positive { color: var(--success); }
-  .negative { color: var(--danger); }
-
-  .bottom-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 32px;
-  }
-
-  .full-width {
-    grid-column: 1 / -1;
-  }
-
-  .loading-log th {
-    background: var(--gray-200);
-  }
-
-  @media (max-width: 1024px) {
-    .grid-container, .bottom-grid {
-      grid-template-columns: 1fr;
-    }
-    h1 { font-size: 2rem; }
-  }
-
-  @media print {
-    body { background: white; padding: 10px; }
-    .card { box-shadow: none; border: 1px solid var(--gray-300); }
-    @page { size: A4 landscape; margin: 10mm; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quarry MIS Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background: #f5f7fa;
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 60% 40%;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        /* Performance Table */
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .performance-table th {
+            text-align: left;
+            padding: 12px 10px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #ddd;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .performance-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .data-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        /* Achievement Section */
+        .achievement-item {
+            margin-bottom: 25px;
+        }
+        
+        .achievement-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        
+        .progress-bar {
+            height: 24px;
+            background: #ecf0f1;
+            border-radius: 12px;
+            margin: 10px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 12px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-value {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+        
+        .stat-value {
+            font-weight: 700;
+            font-size: 16px;
+            color: #2c3e50;
+        }
+        
+        .stat-label {
+            font-size: 11px;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        /* Area Table */
+        .area-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .area-table th, .area-table td {
+            padding: 10px 8px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .area-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        /* Loading Log */
+        .loading-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .loading-table th, .loading-table td {
+            padding: 10px 8px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+        
+        .loading-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+            white-space: nowrap;
+        }
+        
+        /* Trial Form */
+        .trial-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-group label {
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        /* Remarks Box */
+        .remarks-box {
+            min-height: 200px;
+            height: 100%;
+        }
+        
+        .remarks-textarea {
+            width: 100%;
+            height: 180px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .remarks-textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-body {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <!-- Left Column (60%) -->
+        <div class="left-column">
+            <!-- Performance Metrics -->
+            <div class="card">
+                <div class="card-header">Performance Metrics</div>
+                <div class="card-body">
+                    <table class="performance-table">
+                        <tr>
+                            <th>Metric</th>
+                            <th>FTD</th>
+                            <th>MTD</th>
+                        </tr>
+                        <tr>
+                            <td>Quarry Running Hrs</td>
+                            <td><input type="number" class="data-input" step="0.01" value="8.5"></td>
+                            <td><input type="number" class="data-input" step="0.01" value="156.2"></td>
+                        </tr>
+                        <tr>
+                            <td>Compressors</td>
+                            <td><input type="number" class="data-input" value="12"></td>
+                            <td><input type="number" class="data-input" value="245"></td>
+                        </tr>
+                        <tr>
+                            <td>NMR</td>
+                            <td><input type="number" class="data-input" step="0.01" value="4.2"></td>
+                            <td><input type="number" class="data-input" step="0.01" value="78.5"></td>
+                        </tr>
+                        <tr>
+                            <td>Holes</td>
+                            <td><input type="number" class="data-input" value="850"></td>
+                            <td><input type="number" class="data-input" value="15800"></td>
+                        </tr>
+                        <tr>
+                            <td>Feets</td>
+                            <td><input type="number" class="data-input" value="4250"></td>
+                            <td><input type="number" class="data-input" value="79000"></td>
+                        </tr>
+                        <tr>
+                            <td>Production</td>
+                            <td><input type="number" class="data-input" value="1250"></td>
+                            <td><input type="number" class="data-input" value="22500"></td>
+                        </tr>
+                        <tr>
+                            <td>Boulder transport to plant</td>
+                            <td><input type="number" class="data-input" value="45"></td>
+                            <td><input type="number" class="data-input" value="850"></td>
+                        </tr>
+                        <tr>
+                            <td>Loading Hrs</td>
+                            <td><input type="number" class="data-input" step="0.01" value="6.2"></td>
+                            <td><input type="number" class="data-input" step="0.01" value="112.5"></td>
+                        </tr>
+                        <tr>
+                            <td>Breaking Hrs</td>
+                            <td><input type="number" class="data-input" step="0.01" value="5.8"></td>
+                            <td><input type="number" class="data-input" step="0.01" value="105.3"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
 
-<div class="container">
-  <h1>Quarry MIS Dashboard</h1>
+            <!-- Area Compressor -->
+            <div class="card">
+                <div class="card-header">Area Wise Compressor</div>
+                <div class="card-body">
+                    <table class="area-table">
+                        <tr>
+                            <th>Area</th>
+                            <th>FTD</th>
+                            <th>MTD</th>
+                        </tr>
+                        <tr>
+                            <td>9 Ha – Pit 3</td>
+                            <td><input type="number" class="data-input" value="3"></td>
+                            <td><input type="number" class="data-input" value="55"></td>
+                        </tr>
+                        <tr>
+                            <td>Bench 1</td>
+                            <td><input type="number" class="data-input" value="2"></td>
+                            <td><input type="number" class="data-input" value="38"></td>
+                        </tr>
+                        <tr>
+                            <td>Bench 2</td>
+                            <td><input type="number" class="data-input" value="2"></td>
+                            <td><input type="number" class="data-input" value="42"></td>
+                        </tr>
+                        <tr>
+                            <td>Bench 3</td>
+                            <td><input type="number" class="data-input" value="3"></td>
+                            <td><input type="number" class="data-input" value="52"></td>
+                        </tr>
+                        <tr>
+                            <td>Bench 4</td>
+                            <td><input type="number" class="data-input" value="1"></td>
+                            <td><input type="number" class="data-input" value="28"></td>
+                        </tr>
+                        <tr>
+                            <td>Pit-2</td>
+                            <td><input type="number" class="data-input" value="1"></td>
+                            <td><input type="number" class="data-input" value="30"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
 
-  <div class="grid-container">
-    <!-- Daily & Monthly Metrics -->
-    <div class="card">
-      <div class="card-header primary">Daily & Monthly Metrics</div>
-      <table>
-        <tr>
-          <th>Parameter</th>
-          <th>FTD</th>
-          <th>MTD</th>
-        </tr>
-        <tr><td>Quarry Running Hrs</td><td><input type="number" step="0.01"></td><td><input type="number" step="0.01"></td></tr>
-        <tr><td>Compressors</td><td><input type="number" id="ftd_comp"></td><td><input type="number"></td></tr>
-        <tr><td>NMR</td><td><input type="number" step="0.01"></td><td><input type="number" step="0.01"></td></tr>
-        <tr><td>Holes</td><td><input type="number" id="ftd_holes"></td><td><input type="number"></td></tr>
-        <tr><td>Feets</td><td><input type="number"></td><td><input type="number"></td></tr>
-        <tr><td>Production</td><td><input type="number"></td><td><input type="number"></td></tr>
-        <tr><td>Boulder transport to plant</td><td><input type="number" id="ftd_boulder"></td><td><input type="number"></td></tr>
-        <tr><td>Loading Hrs</td><td><input type="number" step="0.01"></td><td><input type="number" step="0.01"></td></tr>
-        <tr><td>Breaking Hrs</td><td><input type="number" step="0.01"></td><td><input type="number" step="0.01"></td></tr>
-      </table>
+            <!-- Trial Box -->
+            <div class="card">
+                <div class="card-header">Weekly Trial Data</div>
+                <div class="card-body">
+                    <form class="trial-form">
+                        <div class="form-group">
+                            <label>Date:</label>
+                            <input type="date" class="data-input">
+                        </div>
+                        <div class="form-group">
+                            <label>Compressors:</label>
+                            <input type="number" class="data-input">
+                        </div>
+                        <div class="form-group">
+                            <label>NMR:</label>
+                            <input type="number" class="data-input" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Holes:</label>
+                            <input type="number" class="data-input">
+                        </div>
+                        <div class="form-group">
+                            <label>Production:</label>
+                            <input type="number" class="data-input">
+                        </div>
+                        <div class="form-group">
+                            <label>Recovery %:</label>
+                            <input type="number" class="data-input" step="0.01">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column (40%) -->
+        <div class="right-column">
+            <!-- Achievements -->
+            <div class="card">
+                <div class="card-header">Performance Achievements</div>
+                <div class="card-body">
+                    <!-- Compressor Achievement -->
+                    <div class="achievement-item">
+                        <div class="achievement-title">Compressor Achievement</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="comp-fill" style="width: 70.6%; background: #3498db;">
+                                <span class="progress-value">70.6%</span>
+                            </div>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="stat-value">17</div>
+                                <div class="stat-label">target</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">current</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value">5</div>
+                                <div class="stat-label">gap</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Holes Achievement -->
+                    <div class="achievement-item">
+                        <div class="achievement-title">Holes Achievement</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="holes-fill" style="width: 85%; background: #2ecc71;">
+                                <span class="progress-value">85.0%</span>
+                            </div>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="stat-value">1000</div>
+                                <div class="stat-label">target</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value">850</div>
+                                <div class="stat-label">current</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value">150</div>
+                                <div class="stat-label">gap</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Breaking Efficiency -->
+                    <div class="achievement-item">
+                        <div class="achievement-title">Breaking Efficiency</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="breaking-fill" style="width: 66%; background: #e74c3c;">
+                                <span class="progress-value">66%</span>
+                            </div>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="stat-value">85%</div>
+                                <div class="stat-label">target</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value">66%</div>
+                                <div class="stat-label">current</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value">19%</div>
+                                <div class="stat-label">gap</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Log -->
+            <div class="card">
+                <div class="card-header">Loading Log</div>
+                <div class="card-body">
+                    <table class="loading-table">
+                        <tr>
+                            <th>Shift</th>
+                            <th>Start Time</th>
+                            <th>Tippers</th>
+                            <th>End Time</th>
+                            <th>Remark</th>
+                        </tr>
+                        <tr>
+                            <td>Morning</td>
+                            <td><input type="time" class="data-input" value="06:00"></td>
+                            <td><input type="number" class="data-input" value="8"></td>
+                            <td><input type="time" class="data-input" value="14:00"></td>
+                            <td><input type="text" class="data-input" value="Smooth"></td>
+                        </tr>
+                        <tr>
+                            <td>Afternoon</td>
+                            <td><input type="time" class="data-input" value="14:00"></td>
+                            <td><input type="number" class="data-input" value="7"></td>
+                            <td><input type="time" class="data-input" value="22:00"></td>
+                            <td><input type="text" class="data-input" value="Minor delay"></td>
+                        </tr>
+                        <tr>
+                            <td>Night</td>
+                            <td><input type="time" class="data-input" value="22:00"></td>
+                            <td><input type="number" class="data-input" value="6"></td>
+                            <td><input type="time" class="data-input" value="06:00"></td>
+                            <td><input type="text" class="data-input" value="Normal"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Remarks Box -->
+            <div class="card remarks-box">
+                <div class="card-header">Daily Remarks & Notes</div>
+                <div class="card-body">
+                    <textarea class="remarks-textarea" placeholder="Enter daily remarks, observations, issues, or special instructions here...">
+• Compressor #3 needs maintenance check
+• Extra tipper arranged for tomorrow
+• Blasting scheduled for Friday 10 AM
+• Safety inspection completed
+• Water level in pit 2 is high
+                    </textarea>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Achievements -->
-    <div class="card">
-      <div class="card-header success">Achievements (Target: Compressors = 17 | Holes = 1000)</div>
-      <table>
-        <tr>
-          <th>Parameter</th>
-          <th>Ach %</th>
-          <th>Gap %</th>
-        </tr>
-        <tr><td>Compressors</td><td><input type="number" id="ach_comp" step="0.01" readonly class="achievement-value"></td><td><input type="number" id="gap_comp" step="0.01" readonly class="achievement-value"></td></tr>
-        <tr><td>Holes</td><td><input type="number" id="ach_holes" step="0.01" readonly class="achievement-value"></td><td><input type="number" id="gap_holes" step="0.01" readonly class="achievement-value"></td></tr>
-        <tr><td>Boulder transport to plant</td><td><input type="number" step="0.01"></td><td><input type="number" step="0.01"></td></tr>
-        <tr><td>Recovery</td><td><input type="number" step="0.01"></td><td><input type="number" step="0.01"></td></tr>
-        <tr><td>Breaking</td><td><input type="number" step="0.01"></td><td><input type="number" step="0.01"></td></tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="bottom-grid">
-    <!-- Area Wise Compressor -->
-    <div class="card">
-      <div class="card-header warning">Area Wise Compressor</div>
-      <table>
-        <tr>
-          <th>Area</th>
-          <th>FTD</th>
-          <th>MTD</th>
-        </tr>
-        <tr><td>9 Ha – Pit 3</td><td><input type="number"></td><td><input type="number"></td></tr>
-        <tr><td>Bench 1</td><td><input type="number"></td><td><input type="number"></td></tr>
-        <tr><td>Bench 2</td><td><input type="number"></td><td><input type="number"></td></tr>
-        <tr><td>Bench 3</td><td><input type="number"></td><td><input type="number"></td></tr>
-        <tr><td>Bench 4</td><td><input type="number"></td><td><input type="number"></td></tr>
-        <tr><td>Pit-2</td><td><input type="number"></td><td><input type="number"></td></tr>
-      </table>
-    </div>
-
-    <!-- Weekly Trials -->
-    <div class="card">
-      <div class="card-header info">Weekly Trials</div>
-      <table>
-        <tr><td>Date</td><td><input type="date"></td></tr>
-        <tr><td>Area</td><td><input type="text"></td></tr>
-        <tr><td>Compressors</td><td><input type="number"></td></tr>
-        <tr><td>NMR</td><td><input type="number" step="0.01"></td></tr>
-        <tr><td>Holes</td><td><input type="number"></td></tr>
-        <tr><td>Feets</td><td><input type="number"></td></tr>
-        <tr><td>Production</td><td><input type="number"></td></tr>
-        <tr><td>Recovery %</td><td><input type="number" step="0.01"></td></tr>
-        <tr><td>Breaking %</td><td><input type="number" step="0.01"></td></tr>
-        <tr><td>Total Trips</td><td><input type="number"></td></tr>
-      </table>
-    </div>
-  </div>
-
-  <!-- Loading Log -->
-  <div class="card full-width">
-    <div class="card-header primary">Loading Log</div>
-    <table class="loading-log">
-      <tr>
-        <th>Shift</th>
-        <th>Loading Start Time</th>
-        <th>Tipper Available</th>
-        <th>Loading Ending Time</th>
-        <th>Remark</th>
-      </tr>
-      <tr><td>Morning</td><td><input type="time"></td><td><input type="text"></td><td><input type="time"></td><td><input type="text"></td></tr>
-      <tr><td>Afternoon</td><td><input type="time"></td><td><input type="text"></td><td><input type="time"></td><td><input type="text"></td></tr>
-      <tr><td>Night</td><td><input type="time"></td><td><input type="text"></td><td><input type="time"></td><td><input type="text"></td></tr>
-    </table>
-  </div>
-</div>
-
-<script>
-  const targetComp = 17;
-  const targetHoles = 1000;
-
-  function updateAchievements() {
-    const ftdComp = parseFloat(document.getElementById('ftd_comp').value) || 0;
-    const ftdHoles = parseFloat(document.getElementById('ftd_holes').value) || 0;
-
-    const achComp = targetComp > 0 ? (ftdComp / targetComp) * 100 : 0;
-    const gapComp = 100 - achComp;
-
-    const achHoles = targetHoles > 0 ? (ftdHoles / targetHoles) * 100 : 0;
-    const gapHoles = 100 - achHoles;
-
-    document.getElementById('ach_comp').value = achComp.toFixed(2);
-    document.getElementById('gap_comp').value = gapComp.toFixed(2);
-    document.getElementById('ach_holes').value = achHoles.toFixed(2);
-    document.getElementById('gap_holes').value = gapHoles.toFixed(2);
-
-    // Color coding for achievements
-    document.getElementById('ach_comp').classList.toggle('positive', achComp >= 100);
-    document.getElementById('ach_comp').classList.toggle('negative', achComp < 100);
-    document.getElementById('gap_comp').classList.toggle('negative', gapComp > 0);
-    document.getElementById('ach_holes').classList.toggle('positive', achHoles >= 100);
-    document.getElementById('ach_holes').classList.toggle('negative', achHoles < 100);
-    document.getElementById('gap_holes').classList.toggle('negative', gapHoles > 0);
-  }
-
-  document.getElementById('ftd_comp').addEventListener('input', updateAchievements);
-  document.getElementById('ftd_holes').addEventListener('input', updateAchievements);
-
-  // Initial calculation
-  updateAchievements();
-</script>
-
+    <script>
+        // Update achievement bars based on input values
+        function updateAchievements() {
+            // Get values from performance table
+            const ftdCompressors = parseInt(document.querySelectorAll('.performance-table input')[1].value) || 0;
+            const ftdHoles = parseInt(document.querySelectorAll('.performance-table input')[3].value) || 0;
+            const ftdBreaking = parseFloat(document.querySelectorAll('.performance-table input')[8].value) || 0;
+            const runningHours = parseFloat(document.querySelectorAll('.performance-table input')[0].value) || 8.5;
+            
+            // Compressor achievement (target: 17)
+            const compTarget = 17;
+            const compAchievement = Math.min((ftdCompressors / compTarget) * 100, 100);
+            document.getElementById('comp-fill').style.width = compAchievement + '%';
+            document.getElementById('comp-fill').querySelector('.progress-value').textContent = compAchievement.toFixed(1) + '%';
+            
+            // Update compressor stats
+            const compStats = document.querySelectorAll('.achievement-item:nth-child(1) .stat-value');
+            compStats[0].textContent = compTarget;
+            compStats[1].textContent = ftdCompressors;
+            compStats[2].textContent = Math.max(compTarget - ftdCompressors, 0);
+            
+            // Holes achievement (target: 1000)
+            const holesTarget = 1000;
+            const holesAchievement = Math.min((ftdHoles / holesTarget) * 100, 100);
+            document.getElementById('holes-fill').style.width = holesAchievement + '%';
+            document.getElementById('holes-fill').querySelector('.progress-value').textContent = holesAchievement.toFixed(1) + '%';
+            
+            // Update holes stats
+            const holesStats = document.querySelectorAll('.achievement-item:nth-child(2) .stat-value');
+            holesStats[0].textContent = holesTarget;
+            holesStats[1].textContent = ftdHoles;
+            holesStats[2].textContent = Math.max(holesTarget - ftdHoles, 0);
+            
+            // Breaking efficiency calculation
+            const breakingEfficiency = Math.min((ftdBreaking / runningHours) * 100, 100);
+            document.getElementById('breaking-fill').style.width = breakingEfficiency + '%';
+            document.getElementById('breaking-fill').querySelector('.progress-value').textContent = Math.round(breakingEfficiency) + '%';
+            
+            // Update breaking stats
+            const breakingTarget = 85;
+            const breakingStats = document.querySelectorAll('.achievement-item:nth-child(3) .stat-value');
+            breakingStats[0].textContent = breakingTarget + '%';
+            breakingStats[1].textContent = Math.round(breakingEfficiency) + '%';
+            breakingStats[2].textContent = Math.max(breakingTarget - Math.round(breakingEfficiency), 0) + '%';
+        }
+        
+        // Add event listeners to all inputs
+        const inputs = document.querySelectorAll('.data-input');
+        inputs.forEach(input => {
+            input.addEventListener('input', updateAchievements);
+        });
+        
+        // Initialize achievements on page load
+        document.addEventListener('DOMContentLoaded', updateAchievements);
+    </script>
 </body>
 </html>
