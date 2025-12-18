@@ -23,7 +23,7 @@
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 24px;
         }
        
@@ -46,40 +46,43 @@
             padding: 24px;
         }
        
-        /* Performance Table */
+        /* Performance Metrics Section */
+        .performance-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+       
+        /* Performance Table - Text Only */
         .performance-table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 8px;
-            font-size: 15px;
+            border-collapse: collapse;
+            font-size: 16px;
         }
        
         .performance-table th {
             text-align: left;
-            padding: 12px 16px;
+            padding: 14px 16px;
             background: #f8f9fa;
             font-weight: 600;
             color: #2c3e50;
+            border-bottom: 1px solid #e0e0e0;
         }
        
         .performance-table td {
-            padding: 12px 16px;
-            background: #f9fbfc;
+            padding: 14px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 17px;
+            font-weight: 500;
         }
        
-        .data-input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 15px;
-            background: white;
+        .performance-table tr:last-child td {
+            border-bottom: none;
         }
        
-        .data-input:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+        .metric-value {
+            font-weight: 600;
+            color: #2c3e50;
         }
        
         /* Achievement Section */
@@ -118,6 +121,13 @@
             font-weight: 700;
             font-size: 15px;
             text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+       
+        /* Row for Loading Log and Area Wise Compressor */
+        .middle-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
         }
        
         /* Loading Log Table */
@@ -162,6 +172,22 @@
             background: #f9fbfc;
         }
        
+        /* Data Inputs */
+        .data-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            background: white;
+        }
+       
+        .data-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+        }
+       
         /* Trial Form */
         .trial-form {
             display: grid;
@@ -199,9 +225,18 @@
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
         }
        
+        /* Bottom Row for Trial and Remarks */
+        .bottom-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+       
         /* Responsive */
         @media (max-width: 1024px) {
-            .container {
+            .performance-section,
+            .middle-row,
+            .bottom-row {
                 grid-template-columns: 1fr;
             }
             .trial-form {
@@ -213,13 +248,17 @@
             body { padding: 12px; }
             .card-header { font-size: 17px; padding: 16px 20px; }
             .card-body { padding: 20px; }
+            .performance-table td {
+                font-size: 16px;
+                padding: 12px 14px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Left Column -->
-        <div class="left-column">
+        <!-- Performance Metrics with Achievements -->
+        <div class="performance-section">
             <!-- Performance Metrics -->
             <div class="card">
                 <div class="card-header">Performance Metrics</div>
@@ -232,48 +271,48 @@
                         </tr>
                         <tr>
                             <td>Quarry Running Hrs</td>
-                            <td><input type="number" class="data-input" step="0.01" value="8.5"></td>
-                            <td><input type="number" class="data-input" step="0.01" value="156.2"></td>
+                            <td class="metric-value">8.5</td>
+                            <td class="metric-value">156.2</td>
                         </tr>
                         <tr>
                             <td>Compressors</td>
-                            <td><input type="number" class="data-input" value="12"></td>
-                            <td><input type="number" class="data-input" value="245"></td>
+                            <td class="metric-value">12</td>
+                            <td class="metric-value">245</td>
                         </tr>
                         <tr>
                             <td>NMR</td>
-                            <td><input type="number" class="data-input" step="0.01" value="4.2"></td>
-                            <td><input type="number" class="data-input" step="0.01" value="78.5"></td>
+                            <td class="metric-value">4.2</td>
+                            <td class="metric-value">78.5</td>
                         </tr>
                         <tr>
                             <td>Holes</td>
-                            <td><input type="number" class="data-input" value="850"></td>
-                            <td><input type="number" class="data-input" value="15800"></td>
+                            <td class="metric-value">850</td>
+                            <td class="metric-value">15,800</td>
                         </tr>
                         <tr>
                             <td>Feets</td>
-                            <td><input type="number" class="data-input" value="4250"></td>
-                            <td><input type="number" class="data-input" value="79000"></td>
+                            <td class="metric-value">4,250</td>
+                            <td class="metric-value">79,000</td>
                         </tr>
                         <tr>
                             <td>Production</td>
-                            <td><input type="number" class="data-input" value="1250"></td>
-                            <td><input type="number" class="data-input" value="22500"></td>
+                            <td class="metric-value">1,250</td>
+                            <td class="metric-value">22,500</td>
                         </tr>
                         <tr>
                             <td>Boulder transport to plant</td>
-                            <td><input type="number" class="data-input" value="45"></td>
-                            <td><input type="number" class="data-input" value="850"></td>
+                            <td class="metric-value">45</td>
+                            <td class="metric-value">850</td>
                         </tr>
                         <tr>
                             <td>Loading Hrs</td>
-                            <td><input type="number" class="data-input" step="0.01" value="6.2"></td>
-                            <td><input type="number" class="data-input" step="0.01" value="112.5"></td>
+                            <td class="metric-value">6.2</td>
+                            <td class="metric-value">112.5</td>
                         </tr>
                         <tr>
                             <td>Breaking Hrs</td>
-                            <td><input type="number" class="data-input" step="0.01" value="5.8"></td>
-                            <td><input type="number" class="data-input" step="0.01" value="105.3"></td>
+                            <td class="metric-value">5.8</td>
+                            <td class="metric-value">105.3</td>
                         </tr>
                     </table>
                 </div>
@@ -301,6 +340,64 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Production Achievement -->
+                    <div class="achievement-item">
+                        <div class="achievement-title">Production Achievement</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="prod-fill" style="width: 92.5%; background: #9b59b6;">
+                                <span class="progress-value">92.5%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- NMR Achievement -->
+                    <div class="achievement-item">
+                        <div class="achievement-title">NMR Achievement</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="nmr-fill" style="width: 63.8%; background: #e74c3c;">
+                                <span class="progress-value">63.8%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Middle Row: Loading Log and Area Wise Compressor -->
+        <div class="middle-row">
+            <!-- Loading Log -->
+            <div class="card">
+                <div class="card-header">Loading Log</div>
+                <div class="card-body">
+                    <table class="loading-table">
+                        <tr>
+                            <th>Shift</th>
+                            <th>Start Time</th>
+                            <th>Tippers</th>
+                            <th>End Time</th>
+                            <th>Remark</th>
+                        </tr>
+                        <tr>
+                            <td>Morning</td>
+                            <td><input type="time" class="data-input" value="06:00"></td>
+                            <td><input type="number" class="data-input" value="8"></td>
+                            <td><input type="time" class="data-input" value="14:00"></td>
+                            <td><input type="text" class="data-input" value="Smooth"></td>
+                        </tr>
+                        <tr>
+                            <td>Afternoon</td>
+                            <td><input type="time" class="data-input" value="14:00"></td>
+                            <td><input type="number" class="data-input" value="7"></td>
+                            <td><input type="time" class="data-input" value="22:00"></td>
+                            <td><input type="text" class="data-input" value="Minor delay"></td>
+                        </tr>
+                        <tr>
+                            <td>Night</td>
+                            <td><input type="time" class="data-input" value="22:00"></td>
+                            <td><input type="number" class="data-input" value="6"></td>
+                            <td><input type="time" class="data-input" value="06:00"></td>
+                            <td><input type="text" class="data-input" value="Normal"></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
 
@@ -347,7 +444,10 @@
                     </table>
                 </div>
             </div>
+        </div>
 
+        <!-- Bottom Row: Trial Data and Remarks -->
+        <div class="bottom-row">
             <!-- Weekly Trial Data -->
             <div class="card">
                 <div class="card-header">Weekly Trial Data</div>
@@ -380,46 +480,6 @@
                     </form>
                 </div>
             </div>
-        </div>
-
-        <!-- Right Column -->
-        <div class="right-column">
-            <!-- Loading Log -->
-            <div class="card">
-                <div class="card-header">Loading Log</div>
-                <div class="card-body">
-                    <table class="loading-table">
-                        <tr>
-                            <th>Shift</th>
-                            <th>Start Time</th>
-                            <th>Tippers</th>
-                            <th>End Time</th>
-                            <th>Remark</th>
-                        </tr>
-                        <tr>
-                            <td>Morning</td>
-                            <td><input type="time" class="data-input" value="06:00"></td>
-                            <td><input type="number" class="data-input" value="8"></td>
-                            <td><input type="time" class="data-input" value="14:00"></td>
-                            <td><input type="text" class="data-input" value="Smooth"></td>
-                        </tr>
-                        <tr>
-                            <td>Afternoon</td>
-                            <td><input type="time" class="data-input" value="14:00"></td>
-                            <td><input type="number" class="data-input" value="7"></td>
-                            <td><input type="time" class="data-input" value="22:00"></td>
-                            <td><input type="text" class="data-input" value="Minor delay"></td>
-                        </tr>
-                        <tr>
-                            <td>Night</td>
-                            <td><input type="time" class="data-input" value="22:00"></td>
-                            <td><input type="number" class="data-input" value="6"></td>
-                            <td><input type="time" class="data-input" value="06:00"></td>
-                            <td><input type="text" class="data-input" value="Normal"></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
 
             <!-- Daily Remarks -->
             <div class="card">
@@ -438,30 +498,36 @@
     </div>
 
     <script>
+        // Function to update achievements based on FTD values
         function updateAchievements() {
-            const ftdCompressors = parseInt(document.querySelectorAll('.performance-table input')[1].value) || 0;
-            const ftdHoles = parseInt(document.querySelectorAll('.performance-table input')[3].value) || 0;
+            // Get FTD values from performance metrics
+            const ftdValues = {
+                compressors: 12,  // Hardcoded based on table
+                holes: 850,
+                production: 1250,
+                nmr: 4.2
+            };
 
-            // Compressor achievement (target: 17)
-            const compTarget = 17;
-            const compAchievement = Math.min((ftdCompressors / compTarget) * 100, 100);
-            const compFill = document.getElementById('comp-fill');
-            compFill.style.width = compAchievement + '%';
-            compFill.querySelector('.progress-value').textContent = compAchievement.toFixed(1) + '%';
+            // Targets
+            const targets = {
+                compressors: 17,
+                holes: 1000,
+                production: 1350,
+                nmr: 6.5
+            };
 
-            // Holes achievement (target: 1000)
-            const holesTarget = 1000;
-            const holesAchievement = Math.min((ftdHoles / holesTarget) * 100, 100);
-            const holesFill = document.getElementById('holes-fill');
-            holesFill.style.width = holesAchievement + '%';
-            holesFill.querySelector('.progress-value').textContent = holesAchievement.toFixed(1) + '%';
+            // Update each achievement bar
+            Object.keys(ftdValues).forEach(key => {
+                const achievement = Math.min((ftdValues[key] / targets[key]) * 100, 100);
+                const fillElement = document.getElementById(`${key}-fill`);
+                if (fillElement) {
+                    fillElement.style.width = `${achievement}%`;
+                    fillElement.querySelector('.progress-value').textContent = `${achievement.toFixed(1)}%`;
+                }
+            });
         }
 
-        const inputs = document.querySelectorAll('.data-input');
-        inputs.forEach(input => {
-            input.addEventListener('input', updateAchievements);
-        });
-
+        // Initialize achievements on load
         document.addEventListener('DOMContentLoaded', updateAchievements);
     </script>
 </body>
